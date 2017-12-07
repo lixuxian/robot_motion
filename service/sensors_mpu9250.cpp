@@ -46,9 +46,24 @@ status_t store_rotation_vector(sensors_event_t *rotation_vector, int channel){
     return OK;
 }
 
-status_t store_euler_angles(sensors_event_t *euler, int channel){
+status_t store_euler_angles(sensors_event_t *euler, sensors_event_t *acc, sensors_event_t *gyro, int channel){
     select_channel(channel);
     store_sensor_data(&g_acc_data_tmp, &g_gyro_data_tmp, &g_mag_data_tmp, channel);
+    
+    /* add acc, gyro data 2017.12.07 by lixuxian*/
+    acc->channel = channel;
+    acc->type = SENSOR_TYPE_ACCELEROMETER;
+    acc->data[0] = g_acc_data_tmp.data[0];
+    acc->data[1] = g_acc_data_tmp.data[1];
+    acc->data[2] = g_acc_data_tmp.data[2];
+
+    gyro->channel = channel;
+    gyro->type = SENSOR_TYPE_GYROSCOPE;
+    gyro->data[0] = g_gyro_data_tmp.data[0];
+    gyro->data[1] = g_gyro_data_tmp.data[1];
+    gyro->data[2] = g_gyro_data_tmp.data[2];
+    /********************************************/    
+
     euler->channel = channel;
     euler->type = SENSOR_TYPE_EULER_ANGLE;
     // printf("acc:%.2f %.2f %.2f\t gyro:%.2f %.2f %.2f\t mag:%.2f %.2f %.2f time=%lld\n",
@@ -65,10 +80,10 @@ status_t store_euler_angles(sensors_event_t *euler, int channel){
     return OK;
 }
 
-status_t store_multiple_euler_angles(sensors_event_t *euler, int *channels, int n_channels){
+status_t store_multiple_euler_angles(sensors_event_t *euler, sensors_event_t *acc, sensors_event_t *gyro, int *channels, int n_channels){
     int ii = 0;
     for(ii=0; ii<n_channels; ii++){
-        store_euler_angles(euler+ii, channels[ii]);
+        store_euler_angles(euler+ii, acc+ii, gyro+ii, channels[ii]);
     }
     return OK;
 }

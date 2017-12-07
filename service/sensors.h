@@ -37,7 +37,7 @@ void setup_sensors(int *channels, int n_channels);
 
 status_t store_sensor_data(sensors_event_t *accData, sensors_event_t * gyroData, sensors_event_t *magData,  int channel);
 status_t store_rotation_vector(sensors_event_t *rotation_vector, int channel);
-status_t store_euler_angles(sensors_event_t *euler, int channel);
-status_t store_multiple_euler_angles(sensors_event_t *euler, int *channels, int n_channels);
+status_t store_euler_angles(sensors_event_t *euler, sensors_event_t *acc, sensors_event_t *gyro, int channel);
+status_t store_multiple_euler_angles(sensors_event_t *euler, sensors_event_t *acc, sensors_event_t *gyro, int *channels, int n_channels);
 
 #endif

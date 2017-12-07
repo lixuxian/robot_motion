@@ -12,8 +12,9 @@ void SensorSerivce::do_service(){
 
     // mListener.onSensorChanged(mEulerAngles);
 
-    store_multiple_euler_angles(multiEulerAngles, mChannels, mNumberOfChannels);
-    mListener.onMultiSensorChanged(multiEulerAngles, mNumberOfChannels);
+    // add multiAccData, multiGyroData 2017.12.01 by lixuxian
+    store_multiple_euler_angles(multiEulerAngles, multiAccData, multiGyroData, mChannels, mNumberOfChannels);
+    mListener.onMultiSensorChanged(multiEulerAngles, multiAccData, multiGyroData, mNumberOfChannels);
 
     //mCurrentChannelIndex = (mCurrentChannelIndex + 1) % mNumberOfChannels;
 }

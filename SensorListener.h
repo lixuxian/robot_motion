@@ -8,7 +8,7 @@
 class SensorListener{
 public:
     void onSensorChanged(sensors_event_t& event);
-    void onMultiSensorChanged(sensors_event_t *events, int nEvents);
+    void onMultiSensorChanged(sensors_event_t *events, sensors_event_t *accData, sensors_event_t *gyroData, int nEvents);
 };
 
 

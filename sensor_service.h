@@ -18,6 +18,8 @@ private:
     sensors_event_t mMagData;
     sensors_event_t mRotationVector;
     sensors_event_t mEulerAngles;
+    sensors_event_t multiAccData[N_SENSORS];
+    sensors_event_t multiGyroData[N_SENSORS];
     sensors_event_t multiEulerAngles[N_SENSORS];
 
 
